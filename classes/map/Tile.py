@@ -1,3 +1,11 @@
+from random import randint, choice
+from classes.map.Resource import Resource
+
 class Tile:
 	def __init__(self):
-		self.contents = 'this is a placeholder for Resources; it is quite late'
+		self.resources = []
+		self.__populateResources()
+
+	def __populateResources(self):
+		for index in range(randint(2,6)):
+			self.resources.append(Resource(choice(['food', 'water', 'sex'])))
