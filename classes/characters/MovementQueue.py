@@ -1,4 +1,6 @@
 class MovementQueue:
+	POSSIBLEMOVES = ['up','down','left','right']
+
 	def __init__(self):
 		self.moveList = []
 		self.index = 0
@@ -10,6 +12,9 @@ class MovementQueue:
 		else:
 			self.index += 1
 		return move
+
+	def addToQueue(self, move):
+		self.insertIntoQueue(move, len(self.moveList))
 
 	def insertIntoQueue(self, newMove, position):
 		self.moveList = self.moveList[:position] + [newMove] + self.moveList[position:]
