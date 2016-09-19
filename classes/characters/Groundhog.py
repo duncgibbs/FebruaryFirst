@@ -1,9 +1,10 @@
 from classes.characters.Character import Character
-from random import randint, shuffle, choice
+from random import randint, choice
 
 class Groundhog(Character):
 	def __init__(self):
 		Character.__init__(self)
+		self.__populateMovementQueue()
 		self.resources = []
 		self.criteria = self.buildRandomCriteria()
 
@@ -19,11 +20,12 @@ class Groundhog(Character):
 
 
 	def buildRandomCriteria(self):
-		resources = shuffle(['food','water','sex'])
-		multipliers = [-2,-1,1,2,3]
+		resources = ['food','water','sex']
+		multipliers = [-2,-1,2,3]
 		criteria = {}
-		for i in range(randint(0,2)):
-			criteria[resources[i]] = choice(multipliers)
+		for i in range(randint(0,2)): 
+			criteria[choice(resources)] = choice(multipliers)
+		return criteria
 
 	def countResources(self):
 		results = {}
@@ -32,3 +34,8 @@ class Groundhog(Character):
 				results[resource.name] = 0
 			results[resource.name] += 1
 		return results
+
+	def __populateMovementQueue(self):
+		for i in range(4):
+			direction = choice(['up','down','left','right'])
+			self.movementQueue.addToQueue(direction)
